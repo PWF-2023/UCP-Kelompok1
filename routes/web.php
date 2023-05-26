@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+//di import class category controllernya agar terdaftar
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TodoController;
 use App\Http\Controllers\UserController;
@@ -30,6 +31,15 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+
+    Route::get('/todo', [TodoController::class, 'index'])->name('todo.index');
+    Route::post('/todo',[TodoController::class,'store'])->name('todo.store');
+    Route::get('/todo/create', [TodoController::class, 'create'])->name('todo.create');
+    Route::get('/todo/edit', [TodoController::class, 'edit'])->name('todo.edit');
+Route::patch('/todo/{todo}/complete', [TodoController::class, 'complete'])->name('todo.complete');
+    Route::patch('/todo/{todo}/incomplete', [TodoController::class, 'uncomplete'])->name('todo.uncomplete');
+    Route::delete('/todo/{todo}', [TodoController::class, 'destroy'])->name('todo.destroy');
+    Route::delete('/todo', [TodoController::class, 'destroyCompleted'])->name('todo.deleteallcompleted');
     Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
     Route::post('/category', [CategoryController::class, 'store'])->name('category.store');
     Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');
